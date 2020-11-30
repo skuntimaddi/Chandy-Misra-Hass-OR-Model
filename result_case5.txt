@@ -1,0 +1,58 @@
+sasank@ubuntu:~/DC$ g++ CMH_OR.cpp -o CMH_OR.out
+sasank@ubuntu:~/DC$ ./CMH_OR.out
+Enter number of sites(minimum value greater than 1):
+1
+Enter number of processes for site1: (minimum value greater than 1)
+4
+Total number of sites=1; Total number of processes=4
+Enter the wait graph for processes; Enter 1 if the process is dependent and 0 if not.
+Process 1 dependent on 1(1/0) :0
+Process 1 dependent on 2(1/0) :1
+Process 1 dependent on 3(1/0) :0
+Process 1 dependent on 4(1/0) :0
+Process 2 dependent on 1(1/0) :0
+Process 2 dependent on 2(1/0) :0
+Process 2 dependent on 3(1/0) :1
+Process 2 dependent on 4(1/0) :1
+Process 3 dependent on 1(1/0) :0
+Process 3 dependent on 2(1/0) :0
+Process 3 dependent on 3(1/0) :0
+Process 3 dependent on 4(1/0) :1
+Process 4 dependent on 1(1/0) :1
+Process 4 dependent on 2(1/0) :0
+Process 4 dependent on 3(1/0) :0
+Process 4 dependent on 4(1/0) :0
+
+The wait-for graph is : 
+	S1	S2	S3	S4	
+S1	0	1	0	0	
+S2	0	0	1	1	
+S3	0	0	0	1	
+S4	1	0	0	0	
+
+Enter the proccess initiating the probe (Betwwen 1 and no. of proccesses)
+2
+Initiating Probe.....
+
+DIRECTION 	 PROBE 	 MESSAGES 	 WAIT FLAG
+ S2 --> S3     (2,2,3) , 	1 , 	2
+ S3 --> S4     (2,3,4) ,	 1 ,	 1
+ S4 --> S1     (2,4,1) ,	 1 ,	 1
+ S1 --> S2     (2,1,2) --------> DEADLOCK DETECTED HERE
+ S2 --> S4     (2,2,4) , 	1 , 	2
+ S4 --> S1     (2,4,1) ,	 1 ,	 1
+ S1 --> S2     (2,1,2) --------> DEADLOCK DETECTED HERE
+Number of deadlocks detected:2
+Printing wait message array = [1 , 2 , 1 , 1 , ]
+
+ Detecting knot by checking on the response messages.
+ S2 --> S1     (2,2,1) , 	1 , 	2
+ S1 --> S4     (2,1,4) , 	0 , 	0
+ S4 --> S3     (2,4,3) , 	0 , 	0
+ S3 --> S2     (2,3,2) --------> KNOT DETECTED HERE
+ S4 --> S2     (2,4,2) --------> KNOT DETECTED HERE
+Number of knots detected:2
+Equal number of Deadlock and Knot detectied. 
+ All sent messages were received. 
+Hence the Chandy-Misra-Hass OR detected is validated.
+sasank@ubuntu:~/DC$
